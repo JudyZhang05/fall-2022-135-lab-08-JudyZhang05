@@ -9,43 +9,28 @@ void scale(std::string input){
     readImage(input, img, h, w); 
 
     int out[MAX_H][MAX_W];
-    std::cout << h << ' ' << w << std::endl;
-    h*=2; w*=2;
-    std::cout << h << ' ' << w << std::endl;
+    //std::cout << h << ' ' << w << std::endl;
+    //std::cout << h << ' ' << w << std::endl;
     
     for (int row = 0; row < h; row++){
             for (int col = 0; col < w; col++){
-                //std::cout << row << ' ' << col << std::endl;
-                //out[newrow][newcol] = 255;
-                out[newrow][newcol]=img[row][col];
-                out[++newrow][newcol]=img[row][col];
-                out[newrow][++newcol]=img[row][col];
-                out[--newrow][newcol]=img[row][col];
 
-                // out[newrow][newcol]=img[row][col];
-                // out[++newrow][newcol]=img[row][col];
-                // out[newrow][++newcol]=img[row][col];
-                // out[--newrow][newcol]=img[row][col];
+                out[newrow][newcol]=img[row][col];
+                out[newrow][newcol+1]=img[row][col];
+                out[newrow+1][newcol]=img[row][col];
+                out[newrow+1][newcol+1]=img[row][col];
             
                 //std::cout<<std::endl;
                 //std::cout<<newrow <<' ' <<newcol << "        " << row << ' ' << col;
                 //std::cout<<std::endl;
-                newcol++;
+                newcol+=2;
         }
 
-        newrow++;
+        newrow+=2;
         newcol = 0;
 
     }
-    
-
-    // for (int row = 0; row < 3; row++){
-    //     for (int col = 0; col < 3; col++){
-    //         std::cout << out[row][col] << ' ';
-    //     }
-    //     std::cout << std::endl;
-    // }
-    
+    h*=2; w*=2;
     
     writeImage("tempscale.pgm", out, h, w);
 
